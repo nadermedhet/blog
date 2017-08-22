@@ -1,0 +1,24 @@
+{
+  "name": "meanauthapp",
+  "version": "1.0.0",
+  "description": "simple blog for test ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "dependencies": {
+    "angular2-flash-messages": "^1.0.8",
+    "bcryptjs": "*",
+    "body-parser": "*",
+    "cors": "*",
+    "express": "*",
+    "jsonwebtoken": "*",
+    "mongoose": "*",
+    "passport": "*",
+    "passport-jwt": "*",
+    "tinymce": "^4.6.5"
+  },
+  "author": "nader medhet",
+  "license": "ISC"
+}
