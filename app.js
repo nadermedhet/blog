@@ -27,7 +27,7 @@ const post = require('./routes/post');
 const index = require('./routes/index');
 
 // Port Number
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 
 // CORS Middleware
 app.use(cors());
@@ -52,7 +52,12 @@ app.use('/post', post);
 app.use('/', index );
 
 
-
+app.get('/',(req , res)=>{
+  res.send('invliad point');
+});
+app.get('*',(req , res)=>{
+  res.sendFile(path.join(__dirname , 'public/index.html'));
+});
 
 
 // Start Server

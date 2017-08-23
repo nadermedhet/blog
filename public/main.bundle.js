@@ -187,9 +187,9 @@ var LoginAdminComponent = (function () {
         };
         this.adminService.loginAdmin(admin).subscribe(function (data) {
             if (data.sucess) {
-                _this.router.navigate(['/admin']);
                 localStorage.clear();
                 _this.adminService.storeUserData(data.token, data.user);
+                _this.router.navigate(['/admin']);
                 _this.FlashMessages.show('hi ' + data.user.username, {
                     cssClass: 'alert-success',
                     timeout: 5000
@@ -401,7 +401,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/admin/register-admin/register-admin.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-md-6\n col-md-offset-3\">\n<h1> login admin</h1>\n\n<form (submit)=\"onSubmit()\">\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"username\" name=\"username\">\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" class=\"form-control\" [(ngModel)]=\"password\" name=\"password\">\n  </div>\n  <input type=\"submit\" class=\"btn btn-primary\" value=\"Login\">\n</form>\n</div>"
+module.exports = "<div class=\"col-md-6\n col-md-offset-3\">\n<h1> add admin</h1>\n\n<form (submit)=\"onSubmit()\">\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"username\" name=\"username\">\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" class=\"form-control\" [(ngModel)]=\"password\" name=\"password\">\n  </div>\n  <input type=\"submit\" class=\"btn btn-primary\" value=\"Login\">\n</form>\n</div>"
 
 /***/ }),
 
@@ -650,7 +650,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<navbar></navbar>\n<div class=\"container-fluid\">\n\n    <flash-messages></flash-messages>\n    <router-outlet></router-outlet>\n</div>\n<app-footer></app-footer>"
+module.exports = "\n<navbar></navbar>\n<div class=\"container-fluid\">\n\n    <flash-messages></flash-messages>\n    <router-outlet></router-outlet>\n</div>\n<app-footer></app-footer>\n"
 
 /***/ }),
 
@@ -1384,7 +1384,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".footer{\r\n    background-color: #2C3E50;\r\n    padding: 15px;\r\n    color: #fff;\r\n    margin-top: 20px;\r\n\r\n}\r\na{\r\n    color: #fff;\r\n\r\n}\r\ni{\r\n    font-size: 35px;\r\n    margin: 15px;\r\n    transition: 0.6s all ease;\r\n}\r\na:hover{\r\n    color : #736D6D;\r\n    -webkit-transform: scale(1.1);\r\n            transform: scale(1.1);\r\n}", ""]);
+exports.push([module.i, ".footer{\r\n    background-color: #2C3E50;\r\n    padding: 15px;\r\n    color: #fff;\r\n    \r\n    width: 100%;\r\n    height: 100px;\r\n    margin-top: 50px;\r\n\r\n}\r\na{\r\n    color: #fff;\r\n\r\n}\r\ni{\r\n    font-size: 35px;\r\n    margin: 15px;\r\n    transition: 0.6s all ease;\r\n}\r\na:hover{\r\n    color : #736D6D;\r\n    -webkit-transform: scale(1.1);\r\n            transform: scale(1.1);\r\n}", ""]);
 
 // exports
 
@@ -1606,7 +1606,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 class=\"page-header\">Login</h2>\n<form (submit)=\"onLoginSubmit()\">\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"username\" name=\"username\">\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" class=\"form-control\" [(ngModel)]=\"password\" name=\"password\">\n  </div>\n  <input type=\"submit\" class=\"btn btn-primary\" value=\"Login\">\n</form>\n"
+module.exports = "<div class=\"col-md-6\ncol-md-offset-3\">\n<h2 class=\"page-header\">Login</h2>\n\n<form (submit)=\"onLoginSubmit()\">\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"username\" name=\"username\">\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" class=\"form-control\" [(ngModel)]=\"password\" name=\"password\">\n  </div>\n  <input type=\"submit\" class=\"btn btn-primary\" value=\"Login\">\n</form>\n</div>\n<navbar [relosd]=\"reload\"  hidden></navbar>\n\n"
 
 /***/ }),
 
@@ -1638,6 +1638,7 @@ var LoginComponent = (function () {
         this.authService = authService;
         this.router = router;
         this.flashMessage = flashMessage;
+        this.reload = false;
     }
     LoginComponent.prototype.ngOnInit = function () {
     };
@@ -1655,6 +1656,7 @@ var LoginComponent = (function () {
                     timeout: 5000
                 });
                 _this.router.navigate(['/profile']);
+                _this.reload = true;
             }
             else {
                 _this.flashMessage.show(data.msg, {
@@ -1702,7 +1704,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-default\">\n  <div class=\"container\">\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\"\n        aria-controls=\"navbar\">\n            <span class=\"sr-only\">Toggle navigation</span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n          </button>\n      <a class=\"navbar-brand\" [routerLink]=\"['/']\"> blog</a>\n    </div>\n    <div id=\"navbar\" class=\"collapse navbar-collapse\">\n      <ul class=\"nav navbar-nav navbar-left\">\n      </ul>\n\n      <ul class=\"nav navbar-nav navbar-right\" *ngIf = \"!isAdmin\">\n        <li *ngIf=\"user.loggedIn()\">\n          <a [routerLink]=\"['/profile']\">\n                <img src=\"{{ User.image }}\" class=\"img-60\" style=\"\n    width: 25px;\n    height: 25px;\n\">\n\n              {{User.name}}\n              \n\n            \n            </a></li>\n        <li *ngIf=\"user.loggedIn()\"><a (click)=\"onLogoutClick()\" href=\"#\">Logout</a></li>\n\n        <li *ngIf=\"!user.loggedIn()\"><a [routerLink]=\"['/login']\">Login</a></li>\n        <li *ngIf=\"!user.loggedIn()\"><a [routerLink]=\"['/register']\">Register</a></li>\n\n      </ul>\n      <ul class=\"nav navbar-nav navbar-right hh\" *ngIf = \"isAdmin\">\n        <li >\n          \n          hi {{admin.username}}\n          \n     </li>\n        <li (click)=\"adminLogout()\" >Logout </li>\n\n      \n\n      </ul>\n    </div>\n    <!--/.nav-collapse -->\n  </div>\n</nav>\n"
+module.exports = "<nav class=\"navbar navbar-default\">\n  <div class=\"container\">\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\"\n        aria-controls=\"navbar\">\n            <span class=\"sr-only\">Toggle navigation</span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n          </button>\n      <a class=\"navbar-brand\" [routerLink]=\"['/']\"> blog</a>\n    </div>\n    <div id=\"navbar\" class=\"collapse navbar-collapse\">\n      <ul class=\"nav navbar-nav navbar-left\">\n      </ul>\n\n      <ul class=\"nav navbar-nav navbar-right\" *ngIf = \"!isAdmin\">\n        <li *ngIf=\"user.loggedIn() && !isAdmin\">\n          <a [routerLink]=\"['/profile']\">\n\n\n              profile\n              \n\n            \n            </a></li>\n        <li *ngIf=\"user.loggedIn()\"><a (click)=\"onLogoutClick()\" href=\"#\">Logout</a></li>\n\n        <li *ngIf=\"!user.loggedIn()\"><a [routerLink]=\"['/login']\">Login</a></li>\n        <li *ngIf=\"!user.loggedIn()\"><a [routerLink]=\"['/register']\">Register</a></li>\n\n      </ul>\n      <ul class=\"nav navbar-nav navbar-right hh\" *ngIf = \"isAdmin\">\n     \n        <li (click)=\"adminLogout()\" >Logout admin </li>\n\n      \n\n      </ul>\n    </div>\n    <!--/.nav-collapse -->\n  </div>\n</nav>\n"
 
 /***/ }),
 
@@ -1734,41 +1736,42 @@ var NavbarComponent = (function () {
         this.router = router;
         this.adminService = adminService;
     }
-    NavbarComponent.prototype.onLogoutClick = function () {
-        this.user.logout();
-        this.router.navigate(['/login']);
-        this.User = JSON.parse(localStorage.getItem('user'));
-        this.admin = JSON.parse(localStorage.getItem('admin'));
-        if (this.admin) {
-            this.isAdmin = this.admin.admin;
-        }
-        return false;
-    };
     NavbarComponent.prototype.ngOnInit = function () {
-        this.User = JSON.parse(localStorage.getItem('user'));
-        this.admin = JSON.parse(localStorage.getItem('admin'));
-        if (this.admin) {
-            this.isAdmin = this.admin.admin;
-        }
+        this.loadUserData();
     };
     NavbarComponent.prototype.ngOnChanges = function () {
-        this.User = JSON.parse(localStorage.getItem('user'));
-        this.admin = JSON.parse(localStorage.getItem('admin'));
-        if (this.admin) {
-            this.isAdmin = this.admin.admin;
-        }
+        this.loadUserData();
     };
     NavbarComponent.prototype.adminLogout = function () {
         this.adminService.loggout();
-        this.router.navigate(['/be-admin']);
-        this.User = JSON.parse(localStorage.getItem('user'));
-        this.admin = JSON.parse(localStorage.getItem('admin'));
-        if (this.admin) {
-            this.isAdmin = this.admin.admin;
+        localStorage.clear();
+        if (JSON.parse(localStorage.getItem('admin')) == null) {
+            this.router.navigate(['/be-admin']);
+        }
+    };
+    NavbarComponent.prototype.onLogoutClick = function () {
+        this.user.logout();
+        this.router.navigate(['/login']);
+        return false;
+    };
+    NavbarComponent.prototype.loadUserData = function () {
+        if (JSON.parse(localStorage.getItem('user')) != null) {
+            var User = JSON.parse(localStorage.getItem('user'));
+            this.imag = User.image;
+            this.name = User.name;
+        }
+        if (JSON.parse(localStorage.getItem('admin')) != null) {
+            var admin = JSON.parse(localStorage.getItem('admin'));
+            this.isAdmin = admin.admin;
+            this.adminusername = admin.username;
         }
     };
     return NavbarComponent;
 }());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__angular_core__["Input"])(),
+    __metadata("design:type", Object)
+], NavbarComponent.prototype, "relosd", void 0);
 NavbarComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__angular_core__["Component"])({
         selector: 'navbar',
@@ -2026,15 +2029,18 @@ var PostShowComponent = (function () {
     };
     PostShowComponent.prototype.checkIfUserSaved = function () {
         var _this = this;
-        var userId = this.user.id;
-        var i = 0;
-        this.postService.getSavedPost(this._id).subscribe(function (data) {
-            for (i; i < data.length; i++) {
-                if (data[i].userId == userId) {
-                    _this.userSaveIt = true;
+        var user = JSON.parse(localStorage.getItem('user'));
+        if (user != null) {
+            var userId = this.user.id;
+            var i = 0;
+            this.postService.getSavedPost(this._id).subscribe(function (data) {
+                for (i; i < data.length; i++) {
+                    if (data[i].userId == userId) {
+                        _this.userSaveIt = true;
+                    }
                 }
-            }
-        });
+            });
+        }
     };
     PostShowComponent.prototype.unsave = function () {
         var _this = this;
@@ -2215,14 +2221,16 @@ var ProfileComponent = (function () {
     ProfileComponent.prototype.getUserSavedPosts = function () {
         var _this = this;
         var i = 0;
-        this.authService.userSaved(this.user.id).subscribe(function (data) {
-            for (i; i < data.length; i++) {
-                _this.authService.userPosts(data[i].postId).subscribe(function (res) {
-                    _this.savedPosts.push(res);
-                });
-            }
-        });
-        this.savedPosts.reverse();
+        if (JSON.parse(localStorage.getItem('user')) != null) {
+            this.authService.userSaved(this.user.id).subscribe(function (data) {
+                for (i; i < data.length; i++) {
+                    _this.authService.userPosts(data[i].postId).subscribe(function (res) {
+                        _this.savedPosts.push(res);
+                    });
+                }
+            });
+            this.savedPosts.reverse();
+        }
     };
     return ProfileComponent;
 }());
@@ -2261,7 +2269,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/register/register.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 class=\"page-header\">Register</h2>\n<form (submit)=\"onRegisterSubmit()\">\n  <div class=\"form-group\">\n    <label>Name</label>\n    <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Email</label>\n    <input type=\"text\" [(ngModel)]=\"email\" name=\"email\" class=\"form-control\" >\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>confiram Password</label>\n    <input type=\"password\" [(ngModel)]=\"cpassword\" name=\"cpassword\" class=\"form-control\">\n  </div>\n  <input type=\"submit\" class=\"btn btn-primary\" value=\"Submit\">\n</form>\n"
+module.exports = "<div class=\"col-md-6\ncol-md-offset-3\">\n<h2 class=\"page-header\">Register</h2>\n\n<form (submit)=\"onRegisterSubmit()\">\n  <div class=\"form-group\">\n    <label>Name</label>\n    <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Email</label>\n    <input type=\"text\" [(ngModel)]=\"email\" name=\"email\" class=\"form-control\" >\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>confiram Password</label>\n    <input type=\"password\" [(ngModel)]=\"cpassword\" name=\"cpassword\" class=\"form-control\">\n  </div>\n  <input type=\"submit\" class=\"btn btn-primary\" value=\"Submit\">\n</form>\n\n\n</div>\n\n"
 
 /***/ }),
 
@@ -2891,7 +2899,7 @@ var adminGuard = (function () {
         this.admin = JSON.parse(localStorage.getItem("admin"));
     }
     adminGuard.prototype.canActivate = function () {
-        if (this.admin != null) {
+        if (JSON.parse(localStorage.getItem("admin")) != null) {
             return true;
         }
         this.router.navigate(['/be-admin']);
@@ -2937,7 +2945,7 @@ var loginAdminGuard = (function () {
         this.admin = JSON.parse(localStorage.getItem("admin"));
     }
     loginAdminGuard.prototype.canActivate = function () {
-        if (this.admin != null) {
+        if (JSON.parse(localStorage.getItem("admin")) != null) {
             this.router.navigate(['/admin']);
             return false;
         }
